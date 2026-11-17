@@ -587,11 +587,11 @@
     function calcPlan() {
       const bank = getBank();
       const comm = getComm();
-      const riskPct = Math.max(0.5, num(\"p-risk-pct\") || 5) / 100;
-      const layOdd = Math.max(1.02, num(\"p-lay-odd\") || 3.20);
-      const tpPct = Math.max(1, num(\"p-tp-pct\") || 25) / 100;
-      const slPct = Math.max(1, num(\"p-sl-pct\") || 40) / 100;
-      const wr = num(\"p-winrate\") / 100;
+      const riskPct = Math.max(0.5, num("p-risk-pct") || 5) / 100;
+      const layOdd = Math.max(1.02, num("p-lay-odd") || 3.20);
+      const tpPct = Math.max(1, num("p-tp-pct") || 25) / 100;
+      const slPct = Math.max(1, num("p-sl-pct") || 40) / 100;
+      const wr = num("p-winrate") / 100;
       document.getElementById('p-wr-lbl').textContent = `${Math.round(wr * 100)}%`;
 
       const liability = bank * riskPct;
@@ -652,9 +652,9 @@
     }
 
     function setPartial(frac) {
-      const odd = Math.max(1.01, num(\"inp-odd\") || 1.01);
-      const stake = num(\"inp-stake\") || 0;
-      const second = num(\"inp-second\") || 0;
+      const odd = Math.max(1.01, num("inp-odd") || 1.01);
+      const stake = num("inp-stake") || 0;
+      const second = num("inp-second") || 0;
       const ideal = view === 'close_lay' ? (stake + second) / odd : (stake * second) / odd;
       document.getElementById('inp-custom').value = (ideal * frac).toFixed(2);
       calc();
@@ -682,8 +682,8 @@
     }
 
     function computeForOdd(odd) {
-      const stake = num(\"inp-stake\") || 0;
-      const second = num(\"inp-second\") || 0;
+      const stake = num("inp-stake") || 0;
+      const second = num("inp-second") || 0;
       const comm = getComm();
       const bal = numOrNull("inp-bal");
 
@@ -692,7 +692,7 @@
         let targetStake = 0;
         if (strategy === 'green') targetStake = (stake + liability) / odd;
         else if (strategy === 'free') targetStake = liability / Math.max(0.01, odd - 1);
-        else targetStake = num(\"inp-custom\") || 0;
+        else targetStake = num("inp-custom") || 0;
 
         let usedStake = targetStake;
         let limited = false;
@@ -713,7 +713,7 @@
         let targetLay = 0;
         if (strategy === 'green') targetLay = (stake * backOdd) / odd;
         else if (strategy === 'free') targetLay = stake;
-        else targetLay = num(\"inp-custom\") || 0;
+        else targetLay = num("inp-custom") || 0;
 
         let usedLay = targetLay;
         let usedLia = usedLay * (odd - 1);
@@ -735,9 +735,9 @@
     }
 
     function calc() {
-      const stake = num(\"inp-stake\") || 0;
-      const second = num(\"inp-second\") || 0;
-      const odd = Math.max(1.01, num(\"inp-odd\") || 1.01);
+      const stake = num("inp-stake") || 0;
+      const second = num("inp-second") || 0;
+      const odd = Math.max(1.01, num("inp-odd") || 1.01);
       const baseRisk = view === 'close_lay' ? second : stake;
       updateBankBadge(baseRisk);
 
@@ -882,8 +882,8 @@
 
     function addManualJournal() {
       const desc = document.getElementById('j-desc').value.trim() || 'Operação';
-      const risk = num(\"j-risk\") || 0;
-      const pnl = num(\"j-res\") || 0;
+      const risk = num("j-risk") || 0;
+      const pnl = num("j-res") || 0;
       const arr = getJournal();
       arr.unshift({ desc, risk, pnl, ts: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) });
       saveJournal(arr);
@@ -944,11 +944,11 @@
     }
 
     function calcCross() {
-      const layStake = num(\"c-lay-stake\") || 0;
-      const layLia = num(\"c-lay-lia\") || 0;
-      const line = num(\"c-over-line\") || 1.5;
-      const ovStake = num(\"c-over-stake\") || 0;
-      const ovOdd = num(\"c-over-odd\") || 1.01;
+      const layStake = num("c-lay-stake") || 0;
+      const layLia = num("c-lay-lia") || 0;
+      const line = num("c-over-line") || 1.5;
+      const ovStake = num("c-over-stake") || 0;
+      const ovOdd = num("c-over-odd") || 1.01;
       const comm = getComm();
 
       const scenarios = [
