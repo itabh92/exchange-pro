@@ -82,7 +82,7 @@
     .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .field label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
     .input-row { display: flex; gap: 4px; }
-    input[type="number"], input[type="text"], select, textarea {
+    input[type="text" inputmode="decimal"], input[type="text"], select, textarea {
       width: 100%; background: var(--panel-2); border: 1px solid var(--border); color: var(--text);
       padding: 8px 10px; border-radius: 7px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       font-size: 14px; font-weight: 600; outline: none;
@@ -164,7 +164,7 @@
     @media (max-width: 780px) {
       .wrap { padding: max(12px, env(safe-area-inset-top)) 12px calc(76px + env(safe-area-inset-bottom)); }
       .topbar .tabs, .topbar .subtitle { display: none; }
-      input[type="number"], input[type="text"], select, textarea { font-size: 16px !important; }
+      input[type="text" inputmode="decimal"], input[type="text"], select, textarea { font-size: 16px !important; }
       .ios-nav {
         display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;
         position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
@@ -199,9 +199,9 @@
     <div class="bank-bar">
       <div class="bank-left">
         <label for="inp-bank">Banca atual:</label>
-        <input id="inp-bank" type="number" step="0.01" min="0" value="154.00" oninput="savePrefs(); updateAll()" style="width:105px; padding:5px 8px; font-size:13px;" />
+        <input id="inp-bank" type="text" inputmode="decimal" step="0.01" min="0" value="154.00" oninput="savePrefs(); updateAll()" style="width:105px; padding:5px 8px; font-size:13px;" />
         <label for="inp-comm">Comissão (%):</label>
-        <input id="inp-comm" type="number" step="0.1" min="0" max="20" value="2.2" oninput="savePrefs(); updateAll()" style="width:72px; padding:5px 8px; font-size:13px;" title="Sportmarket FairExchange = 2.2%" />
+        <input id="inp-comm" type="text" inputmode="decimal" step="0.1" min="0" max="20" value="2.2" oninput="savePrefs(); updateAll()" style="width:72px; padding:5px 8px; font-size:13px;" title="Sportmarket FairExchange = 2.2%" />
         <span id="bank-badge" class="bank-badge b-ok">Risco: 5.0% da banca</span>
       </div>
       <div id="bank-targets" class="subtitle" style="font-family:ui-monospace, monospace;"></div>
@@ -219,22 +219,22 @@
             <div class="field">
               <label>Risco máximo aceito (% da banca)</label>
               <div class="input-row">
-                <input id="p-risk-pct" type="number" step="0.5" min="1" max="100" value="5" oninput="calcPlan()" />
+                <input id="p-risk-pct" type="text" inputmode="decimal" step="0.5" min="1" max="100" value="5" oninput="calcPlan()" />
                 <button class="btn-sm" onclick="document.getElementById('p-risk-pct').value='5';calcPlan()">5%</button>
                 <button class="btn-sm" onclick="document.getElementById('p-risk-pct').value='10';calcPlan()">10%</button>
               </div>
             </div>
             <div class="field">
               <label>Odd Lay de entrada (ex.: Empate)</label>
-              <input id="p-lay-odd" type="number" step="0.02" min="1.05" value="3.20" oninput="calcPlan()" />
+              <input id="p-lay-odd" type="text" inputmode="decimal" step="0.02" min="1.05" value="3.20" oninput="calcPlan()" />
             </div>
             <div class="field">
               <label>Meta Take Profit (% sobre risco)</label>
-              <input id="p-tp-pct" type="number" step="5" min="5" max="95" value="25" oninput="calcPlan()" />
+              <input id="p-tp-pct" type="text" inputmode="decimal" step="5" min="5" max="95" value="25" oninput="calcPlan()" />
             </div>
             <div class="field">
               <label>Limite Stop Loss (% sobre risco)</label>
-              <input id="p-sl-pct" type="number" step="5" min="5" max="100" value="40" oninput="calcPlan()" />
+              <input id="p-sl-pct" type="text" inputmode="decimal" step="5" min="5" max="100" value="40" oninput="calcPlan()" />
             </div>
           </div>
 
@@ -293,23 +293,23 @@
           <div class="fields">
             <div class="field">
               <label id="lbl-stake">Stake do Lay (verde)</label>
-              <input id="inp-stake" type="number" step="0.01" min="0" value="100.00" oninput="calc()" />
+              <input id="inp-stake" type="text" inputmode="decimal" step="0.01" min="0" value="100.00" oninput="calc()" />
             </div>
             <div class="field">
               <label id="lbl-second">Liability / Risco (vermelho)</label>
-              <input id="inp-second" type="number" step="0.01" min="0" value="149.47" oninput="calc()" />
+              <input id="inp-second" type="text" inputmode="decimal" step="0.01" min="0" value="149.47" oninput="calc()" />
             </div>
             <div class="field">
               <label id="lbl-odd">Odd atual para fechar</label>
               <div class="input-row">
                 <button class="nudge" onclick="nudgeOdd(-1)">−</button>
-                <input id="inp-odd" type="number" step="0.01" min="1.01" value="50" oninput="calc()" />
+                <input id="inp-odd" type="text" inputmode="decimal" step="0.01" min="1.01" value="50" oninput="calc()" />
                 <button class="nudge" onclick="nudgeOdd(1)">+</button>
               </div>
             </div>
             <div class="field">
               <label>Saldo livre (Bal) opcional</label>
-              <input id="inp-bal" type="number" step="0.01" min="0" placeholder="Sem trava (∞)" oninput="calc()" />
+              <input id="inp-bal" type="text" inputmode="decimal" step="0.01" min="0" placeholder="Sem trava (∞)" oninput="calc()" />
             </div>
           </div>
 
@@ -323,7 +323,7 @@
             <div class="fields">
               <div class="field">
                 <label>Stake manual para testar</label>
-                <input id="inp-custom" type="number" step="0.01" min="0" value="4.52" oninput="calc()" />
+                <input id="inp-custom" type="text" inputmode="decimal" step="0.01" min="0" value="4.52" oninput="calc()" />
               </div>
               <div class="field">
                 <label>Atalho saída parcial (%)</label>
@@ -430,8 +430,8 @@
           </div>
           <div style="display:grid; grid-template-columns: 1fr 90px 90px auto; gap:6px; margin-bottom:10px;">
             <input id="j-desc" type="text" placeholder="Jogo (ex: Irlanda U21)" style="font-size:12px;" />
-            <input id="j-risk" type="number" step="0.01" placeholder="Risco" style="font-size:12px;" />
-            <input id="j-res" type="number" step="0.01" placeholder="Lucro +/-" style="font-size:12px;" />
+            <input id="j-risk" type="text" inputmode="decimal" step="0.01" placeholder="Risco" style="font-size:12px;" />
+            <input id="j-res" type="text" inputmode="decimal" step="0.01" placeholder="Lucro +/-" style="font-size:12px;" />
             <button class="btn-log" onclick="addManualJournal()">+</button>
           </div>
           <table>
@@ -448,8 +448,8 @@
             <div class="field">
               <label>Stake Lay / Liability Lay</label>
               <div class="input-row">
-                <input id="c-lay-stake" type="number" step="0.01" value="10.00" oninput="calcCross()" />
-                <input id="c-lay-lia" type="number" step="0.01" value="25.00" oninput="calcCross()" />
+                <input id="c-lay-stake" type="text" inputmode="decimal" step="0.01" value="10.00" oninput="calcCross()" />
+                <input id="c-lay-lia" type="text" inputmode="decimal" step="0.01" value="25.00" oninput="calcCross()" />
               </div>
             </div>
             <div class="field">
@@ -460,8 +460,8 @@
                   <option value="1.5" selected>O1.5</option>
                   <option value="2.5">O2.5</option>
                 </select>
-                <input id="c-over-stake" type="number" step="0.01" value="15.00" oninput="calcCross()" />
-                <input id="c-over-odd" type="number" step="0.01" value="1.65" oninput="calcCross()" />
+                <input id="c-over-stake" type="text" inputmode="decimal" step="0.01" value="15.00" oninput="calcCross()" />
+                <input id="c-over-odd" type="text" inputmode="decimal" step="0.01" value="1.65" oninput="calcCross()" />
               </div>
             </div>
           </div>
@@ -492,8 +492,22 @@
     let planCopyValue = '3.50';
     let lastSingleRes = null;
 
-    function getComm() { return Math.max(0, parseFloat(document.getElementById('inp-comm').value) || 0) / 100; }
-    function getBank() { return Math.max(0, parseFloat(document.getElementById('inp-bank').value) || 0); }
+    function num(id) {
+      const el = document.getElementById(id);
+      if (!el) return 0;
+      const v = parseFloat(String(el.value).replace(",", ".").replace(/[^\d.-]/g, ""));
+      return isNaN(v) ? 0 : v;
+    }
+    function numOrNull(id) {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const raw = String(el.value).trim();
+      if (raw === "") return null;
+      const v = parseFloat(raw.replace(",", ".").replace(/[^\d.-]/g, ""));
+      return isNaN(v) ? null : Math.max(0, v);
+    }
+    function getComm() { return Math.max(0, num("inp-comm")) / 100; }
+    function getBank() { return Math.max(0, num("inp-bank")); }
     function fmt(v) { return (v > 0 ? '+' : '') + v.toFixed(2); }
 
     function loadPrefs() {
@@ -573,11 +587,11 @@
     function calcPlan() {
       const bank = getBank();
       const comm = getComm();
-      const riskPct = Math.max(0.5, parseFloat(document.getElementById('p-risk-pct').value) || 5) / 100;
-      const layOdd = Math.max(1.02, parseFloat(document.getElementById('p-lay-odd').value) || 3.20);
-      const tpPct = Math.max(1, parseFloat(document.getElementById('p-tp-pct').value) || 25) / 100;
-      const slPct = Math.max(1, parseFloat(document.getElementById('p-sl-pct').value) || 40) / 100;
-      const wr = parseFloat(document.getElementById('p-winrate').value) / 100;
+      const riskPct = Math.max(0.5, num(\"p-risk-pct\") || 5) / 100;
+      const layOdd = Math.max(1.02, num(\"p-lay-odd\") || 3.20);
+      const tpPct = Math.max(1, num(\"p-tp-pct\") || 25) / 100;
+      const slPct = Math.max(1, num(\"p-sl-pct\") || 40) / 100;
+      const wr = num(\"p-winrate\") / 100;
       document.getElementById('p-wr-lbl').textContent = `${Math.round(wr * 100)}%`;
 
       const liability = bank * riskPct;
@@ -638,9 +652,9 @@
     }
 
     function setPartial(frac) {
-      const odd = Math.max(1.01, parseFloat(document.getElementById('inp-odd').value) || 1.01);
-      const stake = parseFloat(document.getElementById('inp-stake').value) || 0;
-      const second = parseFloat(document.getElementById('inp-second').value) || 0;
+      const odd = Math.max(1.01, num(\"inp-odd\") || 1.01);
+      const stake = num(\"inp-stake\") || 0;
+      const second = num(\"inp-second\") || 0;
       const ideal = view === 'close_lay' ? (stake + second) / odd : (stake * second) / odd;
       document.getElementById('inp-custom').value = (ideal * frac).toFixed(2);
       calc();
@@ -661,25 +675,24 @@
 
     function nudgeOdd(dir) {
       const el = document.getElementById('inp-odd');
-      const cur = parseFloat(el.value) || 1.01;
+      const cur = num("inp-odd") || 1.01;
       const next = Math.max(1.01, cur + dir * getStep(cur));
       el.value = next >= 20 ? next.toFixed(0) : next.toFixed(2);
       calc();
     }
 
     function computeForOdd(odd) {
-      const stake = parseFloat(document.getElementById('inp-stake').value) || 0;
-      const second = parseFloat(document.getElementById('inp-second').value) || 0;
+      const stake = num(\"inp-stake\") || 0;
+      const second = num(\"inp-second\") || 0;
       const comm = getComm();
-      const balRaw = document.getElementById('inp-bal').value.trim();
-      const bal = balRaw === '' ? null : Math.max(0, parseFloat(balRaw) || 0);
+      const bal = numOrNull("inp-bal");
 
       if (view === 'close_lay') {
         const liability = second;
         let targetStake = 0;
         if (strategy === 'green') targetStake = (stake + liability) / odd;
         else if (strategy === 'free') targetStake = liability / Math.max(0.01, odd - 1);
-        else targetStake = parseFloat(document.getElementById('inp-custom').value) || 0;
+        else targetStake = num(\"inp-custom\") || 0;
 
         let usedStake = targetStake;
         let limited = false;
@@ -700,7 +713,7 @@
         let targetLay = 0;
         if (strategy === 'green') targetLay = (stake * backOdd) / odd;
         else if (strategy === 'free') targetLay = stake;
-        else targetLay = parseFloat(document.getElementById('inp-custom').value) || 0;
+        else targetLay = num(\"inp-custom\") || 0;
 
         let usedLay = targetLay;
         let usedLia = usedLay * (odd - 1);
@@ -722,9 +735,9 @@
     }
 
     function calc() {
-      const stake = parseFloat(document.getElementById('inp-stake').value) || 0;
-      const second = parseFloat(document.getElementById('inp-second').value) || 0;
-      const odd = Math.max(1.01, parseFloat(document.getElementById('inp-odd').value) || 1.01);
+      const stake = num(\"inp-stake\") || 0;
+      const second = num(\"inp-second\") || 0;
+      const odd = Math.max(1.01, num(\"inp-odd\") || 1.01);
       const baseRisk = view === 'close_lay' ? second : stake;
       updateBankBadge(baseRisk);
 
@@ -869,8 +882,8 @@
 
     function addManualJournal() {
       const desc = document.getElementById('j-desc').value.trim() || 'Operação';
-      const risk = parseFloat(document.getElementById('j-risk').value) || 0;
-      const pnl = parseFloat(document.getElementById('j-res').value) || 0;
+      const risk = num(\"j-risk\") || 0;
+      const pnl = num(\"j-res\") || 0;
       const arr = getJournal();
       arr.unshift({ desc, risk, pnl, ts: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) });
       saveJournal(arr);
@@ -931,11 +944,11 @@
     }
 
     function calcCross() {
-      const layStake = parseFloat(document.getElementById('c-lay-stake').value) || 0;
-      const layLia = parseFloat(document.getElementById('c-lay-lia').value) || 0;
-      const line = parseFloat(document.getElementById('c-over-line').value) || 1.5;
-      const ovStake = parseFloat(document.getElementById('c-over-stake').value) || 0;
-      const ovOdd = parseFloat(document.getElementById('c-over-odd').value) || 1.01;
+      const layStake = num(\"c-lay-stake\") || 0;
+      const layLia = num(\"c-lay-lia\") || 0;
+      const line = num(\"c-over-line\") || 1.5;
+      const ovStake = num(\"c-over-stake\") || 0;
+      const ovOdd = num(\"c-over-odd\") || 1.01;
       const comm = getComm();
 
       const scenarios = [
@@ -989,7 +1002,7 @@
       if (e.key === '4') setView('journal');
     });
 
-    document.querySelectorAll('input[type="number"]').forEach(el => el.setAttribute('inputmode', 'decimal'));
+    document.querySelectorAll('input[type="text" inputmode="decimal"]').forEach(el => el.setAttribute('inputmode', 'decimal'));
     loadPrefs();
     calcPlan();
   </script>
